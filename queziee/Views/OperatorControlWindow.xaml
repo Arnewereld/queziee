@@ -1,0 +1,408 @@
+<Window x:Class="queziee.Views.OperatorControlWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="ROC-Events Quiz - Operator Panel" Height="700" Width="900"
+        WindowStartupLocation="CenterScreen" Background="#0f172a"
+        Topmost="True">
+    
+    <Window.Resources>
+        <!-- Glow Effect -->
+        <DropShadowEffect x:Key="GlowEffect" 
+                          Color="#3b82f6" 
+                          BlurRadius="20" 
+                          ShadowDepth="0" 
+                          Opacity="0.6"/>
+        
+        <DropShadowEffect x:Key="ButtonShadow" 
+                          Color="Black" 
+                          BlurRadius="10" 
+                          ShadowDepth="3" 
+                          Opacity="0.5"/>
+        
+        <!-- Gradient Brushes -->
+        <LinearGradientBrush x:Key="HeaderGradient" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#1e40af" Offset="0"/>
+            <GradientStop Color="#3b82f6" Offset="0.5"/>
+            <GradientStop Color="#1e40af" Offset="1"/>
+        </LinearGradientBrush>
+        
+        <LinearGradientBrush x:Key="PanelGradient" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#1e293b" Offset="0"/>
+            <GradientStop Color="#0f172a" Offset="1"/>
+        </LinearGradientBrush>
+        
+        <!-- Animated Button Style -->
+        <Style x:Key="OperatorButton" TargetType="Button">
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="20,12"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Effect" Value="{StaticResource ButtonShadow}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="10"
+                                Padding="{TemplateBinding Padding}"
+                                BorderThickness="2"
+                                BorderBrush="Transparent">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="White"/>
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="border"
+                                                           Storyboard.TargetProperty="(Border.RenderTransform).(ScaleTransform.ScaleX)"
+                                                           To="1.05" Duration="0:0:0.2"/>
+                                            <DoubleAnimation Storyboard.TargetName="border"
+                                                           Storyboard.TargetProperty="(Border.RenderTransform).(ScaleTransform.ScaleY)"
+                                                           To="1.05" Duration="0:0:0.2"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="border"
+                                                           Storyboard.TargetProperty="(Border.RenderTransform).(ScaleTransform.ScaleX)"
+                                                           To="1.0" Duration="0:0:0.2"/>
+                                            <DoubleAnimation Storyboard.TargetName="border"
+                                                           Storyboard.TargetProperty="(Border.RenderTransform).(ScaleTransform.ScaleY)"
+                                                           To="1.0" Duration="0:0:0.2"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.4"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <ScaleTransform ScaleX="1.0" ScaleY="1.0"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+        </Style>
+        
+        <!-- Pulse Animation for Timer -->
+        <Storyboard x:Key="PulseAnimation" RepeatBehavior="Forever">
+            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                           From="1.0" To="0.4" Duration="0:0:1"
+                           AutoReverse="True"/>
+        </Storyboard>
+    </Window.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Animated Background Effect -->
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#0f172a" Offset="0"/>
+                <GradientStop Color="#1e293b" Offset="0.5"/>
+                <GradientStop Color="#0f172a" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        
+        <!-- Header with Gradient -->
+        <Border Grid.Row="0" Background="{StaticResource HeaderGradient}" Padding="25"
+                Effect="{StaticResource GlowEffect}">
+            <StackPanel>
+                <TextBlock Text="?? ROC-Events Quiz - Operator Panel" 
+                           FontSize="28" FontWeight="Bold" 
+                           Foreground="White" HorizontalAlignment="Center" Margin="0,0,0,12">
+                    <TextBlock.Effect>
+                        <DropShadowEffect Color="Black" BlurRadius="8" ShadowDepth="2"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock x:Name="QuizNameText" Text="Quiz Naam" 
+                           FontSize="20" 
+                           Foreground="#fbbf24" HorizontalAlignment="Center">
+                    <TextBlock.Effect>
+                        <DropShadowEffect Color="#f59e0b" BlurRadius="10" ShadowDepth="0" Opacity="0.7"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+            </StackPanel>
+        </Border>
+        
+        <!-- Main Content -->
+        <Grid Grid.Row="1" Margin="25">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <!-- Current Question Info with Animation -->
+            <Border Grid.Row="0" Background="{StaticResource PanelGradient}" 
+                    CornerRadius="15" Padding="25"
+                    BorderBrush="#3b82f6" BorderThickness="2">
+                <Border.Effect>
+                    <DropShadowEffect Color="#3b82f6" BlurRadius="20" ShadowDepth="0" Opacity="0.4"/>
+                </Border.Effect>
+                
+                <StackPanel>
+                    <Grid Margin="0,0,0,20">
+                        <TextBlock x:Name="QuestionNumberText" 
+                                   Text="Vraag 1 van 10" 
+                                   FontSize="24" FontWeight="Bold" 
+                                   Foreground="White" HorizontalAlignment="Center">
+                            <TextBlock.Effect>
+                                <DropShadowEffect Color="#3b82f6" BlurRadius="5"/>
+                            </TextBlock.Effect>
+                        </TextBlock>
+                        
+                        <!-- Animated Timer Display -->
+                        <Border Background="#1e40af" CornerRadius="20" 
+                                Padding="15,8" HorizontalAlignment="Right"
+                                BorderBrush="#3b82f6" BorderThickness="2">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="??" FontSize="24" Foreground="#fbbf24" Margin="0,0,8,0"/>
+                                <TextBlock x:Name="TimerDisplay" 
+                                           Text="30s" 
+                                           FontSize="24" FontWeight="Bold" 
+                                           Foreground="#fbbf24">
+                                    <TextBlock.Effect>
+                                        <DropShadowEffect Color="#f59e0b" BlurRadius="10" ShadowDepth="0"/>
+                                    </TextBlock.Effect>
+                                </TextBlock>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                    
+                    <TextBlock x:Name="CurrentQuestionText" 
+                               Text="Huidige vraag wordt hier getoond..." 
+                               FontSize="18" 
+                               Foreground="#e2e8f0" 
+                               TextWrapping="Wrap" 
+                               HorizontalAlignment="Center"
+                               MaxWidth="800"
+                               Margin="0,0,0,20"
+                               LineHeight="28"/>
+                    
+                    <!-- Correct Answer Display with Glow -->
+                    <Border Background="#0f172a" CornerRadius="12" Padding="20"
+                            BorderBrush="#10b981" BorderThickness="2">
+                        <Border.Effect>
+                            <DropShadowEffect Color="#10b981" BlurRadius="15" ShadowDepth="0" Opacity="0.5"/>
+                        </Border.Effect>
+                        <StackPanel>
+                            <TextBlock Text="? Correct Antwoord:" 
+                                       FontSize="16" FontWeight="Bold" 
+                                       Foreground="#10b981" Margin="0,0,0,10">
+                                <TextBlock.Effect>
+                                    <DropShadowEffect Color="#10b981" BlurRadius="8"/>
+                                </TextBlock.Effect>
+                            </TextBlock>
+                            <TextBlock x:Name="CorrectAnswerText" 
+                                       Text="A: Antwoord hier" 
+                                       FontSize="18" FontWeight="Bold"
+                                       Foreground="White"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Border>
+            
+            <!-- Answers Grid with Enhanced Styling -->
+            <Grid Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <!-- Answer A with Gradient -->
+                <Border Grid.Row="0" Grid.Column="0" x:Name="AnswerABorder"
+                        CornerRadius="15" Padding="20"
+                        BorderThickness="3" BorderBrush="#b91c1c">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#dc2626" Offset="0"/>
+                            <GradientStop Color="#991b1b" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <Border.Effect>
+                        <DropShadowEffect Color="#dc2626" BlurRadius="15" ShadowDepth="3" Opacity="0.6"/>
+                    </Border.Effect>
+                    <StackPanel>
+                        <TextBlock Text="A" FontSize="36" FontWeight="Bold" 
+                                   Foreground="White" HorizontalAlignment="Center" Margin="0,0,0,12">
+                            <TextBlock.Effect>
+                                <DropShadowEffect Color="Black" BlurRadius="5" ShadowDepth="2"/>
+                            </TextBlock.Effect>
+                        </TextBlock>
+                        <TextBlock x:Name="AnswerAText" 
+                                   FontSize="16" Foreground="White" FontWeight="SemiBold"
+                                   TextAlignment="Center" TextWrapping="Wrap"
+                                   Text="Antwoord A"/>
+                    </StackPanel>
+                </Border>
+                
+                <!-- Answer B with Gradient -->
+                <Border Grid.Row="0" Grid.Column="2" x:Name="AnswerBBorder"
+                        CornerRadius="15" Padding="20"
+                        BorderThickness="3" BorderBrush="#1e40af">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#2563eb" Offset="0"/>
+                            <GradientStop Color="#1e40af" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <Border.Effect>
+                        <DropShadowEffect Color="#2563eb" BlurRadius="15" ShadowDepth="3" Opacity="0.6"/>
+                    </Border.Effect>
+                    <StackPanel>
+                        <TextBlock Text="B" FontSize="36" FontWeight="Bold" 
+                                   Foreground="White" HorizontalAlignment="Center" Margin="0,0,0,12">
+                            <TextBlock.Effect>
+                                <DropShadowEffect Color="Black" BlurRadius="5" ShadowDepth="2"/>
+                            </TextBlock.Effect>
+                        </TextBlock>
+                        <TextBlock x:Name="AnswerBText" 
+                                   FontSize="16" Foreground="White" FontWeight="SemiBold"
+                                   TextAlignment="Center" TextWrapping="Wrap"
+                                   Text="Antwoord B"/>
+                    </StackPanel>
+                </Border>
+                
+                <!-- Answer C with Gradient -->
+                <Border Grid.Row="2" Grid.Column="0" x:Name="AnswerCBorder"
+                        CornerRadius="15" Padding="20"
+                        BorderThickness="3" BorderBrush="#a16207">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#eab308" Offset="0"/>
+                            <GradientStop Color="#ca8a04" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <Border.Effect>
+                        <DropShadowEffect Color="#eab308" BlurRadius="15" ShadowDepth="3" Opacity="0.6"/>
+                    </Border.Effect>
+                    <StackPanel>
+                        <TextBlock Text="C" FontSize="36" FontWeight="Bold" 
+                                   Foreground="White" HorizontalAlignment="Center" Margin="0,0,0,12">
+                            <TextBlock.Effect>
+                                <DropShadowEffect Color="Black" BlurRadius="5" ShadowDepth="2"/>
+                            </TextBlock.Effect>
+                        </TextBlock>
+                        <TextBlock x:Name="AnswerCText" 
+                                   FontSize="16" Foreground="White" FontWeight="SemiBold"
+                                   TextAlignment="Center" TextWrapping="Wrap"
+                                   Text="Antwoord C"/>
+                    </StackPanel>
+                </Border>
+                
+                <!-- Answer D with Gradient -->
+                <Border Grid.Row="2" Grid.Column="2" x:Name="AnswerDBorder"
+                        CornerRadius="15" Padding="20"
+                        BorderThickness="3" BorderBrush="#15803d">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#22c55e" Offset="0"/>
+                            <GradientStop Color="#16a34a" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <Border.Effect>
+                        <DropShadowEffect Color="#22c55e" BlurRadius="15" ShadowDepth="3" Opacity="0.6"/>
+                    </Border.Effect>
+                    <StackPanel>
+                        <TextBlock Text="D" FontSize="36" FontWeight="Bold" 
+                                   Foreground="White" HorizontalAlignment="Center" Margin="0,0,0,12">
+                            <TextBlock.Effect>
+                                <DropShadowEffect Color="Black" BlurRadius="5" ShadowDepth="2"/>
+                            </TextBlock.Effect>
+                        </TextBlock>
+                        <TextBlock x:Name="AnswerDText" 
+                                   FontSize="16" Foreground="White" FontWeight="SemiBold"
+                                   TextAlignment="Center" TextWrapping="Wrap"
+                                   Text="Antwoord D"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Grid>
+        
+        <!-- Control Buttons Footer with Gradient -->
+        <Border Grid.Row="2" Padding="25"
+                BorderBrush="#3b82f6" BorderThickness="0,2,0,0">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#1e293b" Offset="0"/>
+                    <GradientStop Color="#0f172a" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                    <Button x:Name="PreviousButton" Content="? Vorige Vraag" 
+                            Background="#6b7280" Foreground="White"
+                            Style="{StaticResource OperatorButton}"
+                            Click="PreviousButton_Click"/>
+                </StackPanel>
+                
+                <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <!-- Timer Controls -->
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,12">
+                        <Button x:Name="StartTimerButton" Content="?? Start Timer" 
+                                Background="#8b5cf6" Foreground="White"
+                                Style="{StaticResource OperatorButton}"
+                                Padding="18,10" FontSize="15"
+                                Click="StartTimerButton_Click"/>
+                        <Button x:Name="StopTimerButton" Content="?? Stop Timer" 
+                                Background="#dc2626" Foreground="White"
+                                Style="{StaticResource OperatorButton}"
+                                Padding="18,10" FontSize="15"
+                                Click="StopTimerButton_Click"/>
+                    </StackPanel>
+                    
+                    <!-- Answer and Next Buttons -->
+                    <Button x:Name="ShowAnswerButton" Content="? Toon Correct Antwoord" 
+                            Background="#f59e0b" Foreground="White"
+                            Style="{StaticResource OperatorButton}"
+                            Width="360" FontSize="18"
+                            Click="ShowAnswerButton_Click"/>
+                    <Button x:Name="NextButton" Content="Volgende Vraag ?" 
+                            Background="#10b981" Foreground="White"
+                            Style="{StaticResource OperatorButton}"
+                            Width="360" FontSize="18"
+                            Click="NextButton_Click"
+                            Visibility="Collapsed"/>
+                </StackPanel>
+                
+                <StackPanel Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <Button x:Name="CloseButton" Content="? Sluiten" 
+                            Background="#dc2626" Foreground="White"
+                            Style="{StaticResource OperatorButton}"
+                            Click="CloseButton_Click"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

@@ -1,0 +1,120 @@
+[
+  {
+    "Id": 1,
+    "Name": "Algemene Kennis Quiz",
+    "Description": "Een quiz met algemene kennisvragen",
+    "TimePerQuestion": 30,
+    "Questions": [
+      {
+        "Id": 1,
+        "QuizId": 1,
+        "Text": "Wat is de hoofdstad van Nederland?",
+        "ImagePath": null,
+        "AnswerA": "Amsterdam",
+        "AnswerB": "Den Haag",
+        "AnswerC": "Rotterdam",
+        "AnswerD": "Utrecht",
+        "CorrectAnswer": "A"
+      },
+      {
+        "Id": 2,
+        "QuizId": 1,
+        "Text": "Hoeveel benen heeft een spin?",
+        "ImagePath": null,
+        "AnswerA": "6",
+        "AnswerB": "8",
+        "AnswerC": "10",
+        "AnswerD": "12",
+        "CorrectAnswer": "B"
+      },
+      {
+        "Id": 3,
+        "QuizId": 1,
+        "Text": "In welk jaar viel de Berlijnse Muur?",
+        "ImagePath": null,
+        "AnswerA": "1987",
+        "AnswerB": "1988",
+        "AnswerC": "1989",
+        "AnswerD": "1990",
+        "CorrectAnswer": "C"
+      },
+      {
+        "Id": 4,
+        "QuizId": 1,
+        "Text": "Welke planeet staat het dichtst bij de zon?",
+        "ImagePath": null,
+        "AnswerA": "Venus",
+        "AnswerB": "Aarde",
+        "AnswerC": "Mars",
+        "AnswerD": "Mercurius",
+        "CorrectAnswer": "D"
+      },
+      {
+        "Id": 5,
+        "QuizId": 1,
+        "Text": "Hoeveel minuten zijn er in een dag?",
+        "ImagePath": null,
+        "AnswerA": "1440",
+        "AnswerB": "1400",
+        "AnswerC": "1480",
+        "AnswerD": "1500",
+        "CorrectAnswer": "A"
+      },
+      {
+        "Id": 6,
+        "QuizId": 1,
+        "Text": "Wat is het grootste zoogdier ter wereld?",
+        "ImagePath": null,
+        "AnswerA": "Olifant",
+        "AnswerB": "Blauwe vinvis",
+        "AnswerC": "Nijlpaard",
+        "AnswerD": "Giraf",
+        "CorrectAnswer": "B"
+      },
+      {
+        "Id": 7,
+        "QuizId": 1,
+        "Text": "Welke kleur krijg je als je rood en geel mengt?",
+        "ImagePath": null,
+        "AnswerA": "Groen",
+        "AnswerB": "Paars",
+        "AnswerC": "Oranje",
+        "AnswerD": "Bruin",
+        "CorrectAnswer": "C"
+      },
+      {
+        "Id": 8,
+        "QuizId": 1,
+        "Text": "Hoeveel strings heeft een standaard gitaar?",
+        "ImagePath": null,
+        "AnswerA": "4",
+        "AnswerB": "5",
+        "AnswerC": "6",
+        "AnswerD": "7",
+        "CorrectAnswer": "C"
+      },
+      {
+        "Id": 9,
+        "QuizId": 1,
+        "Text": "Wat is de chemische formule voor water?",
+        "ImagePath": null,
+        "AnswerA": "H2O",
+        "AnswerB": "CO2",
+        "AnswerC": "O2",
+        "AnswerD": "H2O2",
+        "CorrectAnswer": "A"
+      },
+      {
+        "Id": 10,
+        "QuizId": 1,
+        "Text": "Welke sport wordt gespeeld op Wimbledon?",
+        "ImagePath": null,
+        "AnswerA": "Golf",
+        "AnswerB": "Tennis",
+        "AnswerC": "Cricket",
+        "AnswerD": "Voetbal",
+        "CorrectAnswer": "B"
+      }
+    ]
+  }
+]
