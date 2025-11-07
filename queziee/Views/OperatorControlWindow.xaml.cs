@@ -17,7 +17,38 @@ namespace queziee.Views
             _quiz = quiz;
             _gameWindow = gameWindow;
             
+            // Subscribe to timer events from GameWindow
+            _gameWindow.TimerTicked += OnGameWindowTimerTicked;
+            _gameWindow.TimerFinished += OnGameWindowTimerFinished;
+            
             InitializeOperatorPanel();
+        }
+        
+        private void OnGameWindowTimerTicked(object? sender, int timeRemaining)
+        {
+            // Update timer display in operator panel
+            TimerDisplay.Text = $"{timeRemaining}s";
+            
+            // Change color based on time remaining
+            if (timeRemaining <= 5)
+            {
+                TimerDisplay.Foreground = new SolidColorBrush(Color.FromRgb(220, 38, 38)); // Red
+            }
+            else if (timeRemaining <= 10)
+            {
+                TimerDisplay.Foreground = new SolidColorBrush(Color.FromRgb(251, 191, 36)); // Yellow
+            }
+            else
+            {
+                TimerDisplay.Foreground = new SolidColorBrush(Color.FromRgb(251, 191, 36)); // Yellow
+            }
+        }
+        
+        private void OnGameWindowTimerFinished(object? sender, EventArgs e)
+        {
+            // Show "TIJD OM!" in operator panel too
+            TimerDisplay.Text = "TIJD OM!";
+            TimerDisplay.Foreground = new SolidColorBrush(Color.FromRgb(220, 38, 38)); // Red
         }
         
         private void InitializeOperatorPanel()
@@ -59,6 +90,10 @@ namespace queziee.Views
             
             // Reset answer borders
             ResetAnswerBorders();
+            
+            // Reset timer display
+            TimerDisplay.Text = $"{_quiz.TimePerQuestion}s";
+            TimerDisplay.Foreground = new SolidColorBrush(Color.FromRgb(251, 191, 36)); // Yellow
             
             // Update buttons
             PreviousButton.IsEnabled = _currentQuestionIndex > 0;
@@ -188,6 +223,10 @@ namespace queziee.Views
         
         protected override void OnClosed(EventArgs e)
         {
+            // Unsubscribe from events to prevent memory leaks
+            _gameWindow.TimerTicked -= OnGameWindowTimerTicked;
+            _gameWindow.TimerFinished -= OnGameWindowTimerFinished;
+            
             base.OnClosed(e);
         }
     }

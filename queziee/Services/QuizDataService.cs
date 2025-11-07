@@ -11,10 +11,18 @@ namespace queziee.Services
         
         public QuizDataService()
         {
-            _dataFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, DataFileName);
+            // Get solution directory by going up from bin folder
+            // bin\Debug\net8.0-windows -> up 3 levels -> project root
+            var binDirectory = AppDomain.CurrentDomain.BaseDirectory;
             
-            // DEBUG: Show file path in console
-            System.Diagnostics.Debug.WriteLine($"?? Quiz data wordt opgeslagen in: {_dataFilePath}");
+            // Navigate up: bin\Debug\net8.0-windows -> bin\Debug -> bin -> queziee (project root)
+            var projectRoot = Path.GetFullPath(Path.Combine(binDirectory, @"..\..\..\"));
+            
+            _dataFilePath = Path.Combine(projectRoot, DataFileName);
+            
+            // DEBUG: Show EXACT file path
+            System.Diagnostics.Debug.WriteLine($"?? Data file locatie: {_dataFilePath}");
+            System.Diagnostics.Debug.WriteLine($"?? File bestaat: {File.Exists(_dataFilePath)}");
         }
         
         public async Task<List<Quiz>> GetQuizzesAsync()
@@ -32,7 +40,7 @@ namespace queziee.Services
                 {
                     PropertyNameCaseInsensitive = true
                 });
-                System.Diagnostics.Debug.WriteLine($"? {quizzes?.Count ?? 0} quizzen geladen van {_dataFilePath}");
+                System.Diagnostics.Debug.WriteLine($"? {quizzes?.Count ?? 0} quizzen geladen");
                 return quizzes ?? new List<Quiz>();
             }
             catch (Exception ex)
@@ -64,7 +72,7 @@ namespace queziee.Services
             quiz.Id = quizzes.Any() ? quizzes.Max(q => q.Id) + 1 : 1;
             quizzes.Add(quiz);
             await SaveQuizzesAsync(quizzes);
-            System.Diagnostics.Debug.WriteLine($"? Quiz '{quiz.Name}' toegevoegd met ID {quiz.Id}");
+            System.Diagnostics.Debug.WriteLine($"? Quiz '{quiz.Name}' toegevoegd");
         }
         
         public async Task UpdateQuizAsync(Quiz quiz)
@@ -87,7 +95,7 @@ namespace queziee.Services
             {
                 quizzes.Remove(quiz);
                 await SaveQuizzesAsync(quizzes);
-                System.Diagnostics.Debug.WriteLine($"??? Quiz '{quiz.Name}' verwijderd");
+                System.Diagnostics.Debug.WriteLine($"??? Quiz verwijderd");
             }
         }
     }

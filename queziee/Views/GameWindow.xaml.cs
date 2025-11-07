@@ -14,6 +14,10 @@ namespace queziee.Views
         private DispatcherTimer? _timer;
         private int _timeRemaining;
         
+        // Event to notify when timer updates
+        public event EventHandler<int>? TimerTicked;
+        public event EventHandler? TimerFinished;
+        
         public GameWindow(Quiz quiz)
         {
             InitializeComponent();
@@ -73,6 +77,9 @@ namespace queziee.Views
             TimerText.Text = _timeRemaining.ToString();
             TimerText.Foreground = new SolidColorBrush(Color.FromRgb(251, 191, 36)); // Yellow
             _timer?.Stop();
+            
+            // Notify operator panel about reset
+            TimerTicked?.Invoke(this, _timeRemaining);
         }
         
         private void ResetAnswerColors()
@@ -146,6 +153,9 @@ namespace queziee.Views
             TimerText.Text = _timeRemaining.ToString();
             TimerText.Foreground = new SolidColorBrush(Color.FromRgb(251, 191, 36)); // Yellow
             _timer?.Start();
+            
+            // Notify operator panel
+            TimerTicked?.Invoke(this, _timeRemaining);
         }
         
         public void StopTimer()
@@ -158,11 +168,17 @@ namespace queziee.Views
             _timeRemaining--;
             TimerText.Text = _timeRemaining.ToString();
             
+            // Notify operator panel about each tick
+            TimerTicked?.Invoke(this, _timeRemaining);
+            
             if (_timeRemaining <= 0)
             {
                 _timer?.Stop();
                 TimerText.Text = "TIJD OM!";
                 TimerText.Foreground = new SolidColorBrush(Color.FromRgb(220, 38, 38)); // Red
+                
+                // Notify that timer finished
+                TimerFinished?.Invoke(this, EventArgs.Empty);
             }
             else if (_timeRemaining <= 5)
             {
