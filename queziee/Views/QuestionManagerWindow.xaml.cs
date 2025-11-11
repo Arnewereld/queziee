@@ -1,5 +1,6 @@
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using Microsoft.Win32;
 using queziee.Models;
 using queziee.Services;
@@ -55,13 +56,12 @@ namespace queziee.Views
             _selectedQuestion = null;
         }
         
-        private void QuestionsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void QuestionBorder_Click(object sender, RoutedEventArgs e)
         {
-            _selectedQuestion = QuestionsListBox.SelectedItem as Question;
-            _isEditingNewQuestion = false;
-            
-            if (_selectedQuestion != null)
+            if (sender is Border border && border.DataContext is Question question)
             {
+                _selectedQuestion = question;
+                _isEditingNewQuestion = false;
                 _currentQuestionIndex = _selectedQuiz?.Questions.IndexOf(_selectedQuestion) ?? -1;
                 ShowQuestionEditor();
                 UpdateQuestionNavigationButtons();
@@ -124,7 +124,6 @@ namespace queziee.Views
             
             _currentQuestionIndex--;
             _selectedQuestion = _selectedQuiz.Questions[_currentQuestionIndex];
-            QuestionsListBox.SelectedIndex = _currentQuestionIndex;
             ShowQuestionEditor();
         }
         
@@ -134,7 +133,6 @@ namespace queziee.Views
             
             _currentQuestionIndex++;
             _selectedQuestion = _selectedQuiz.Questions[_currentQuestionIndex];
-            QuestionsListBox.SelectedIndex = _currentQuestionIndex;
             ShowQuestionEditor();
         }
         

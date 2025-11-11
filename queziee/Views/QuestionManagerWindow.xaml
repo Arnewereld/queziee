@@ -60,7 +60,7 @@
                 <DropShadowEffect Color="#3b82f6" BlurRadius="30" ShadowDepth="0" Opacity="0.7"/>
             </Border.Effect>
             <Grid>
-                <TextBlock Text="?? Vragen en Quizzen Beheren" 
+                <TextBlock Text="📝 Vragen en Quizzen Beheren" 
                            FontSize="28" FontWeight="Bold" 
                            Foreground="White" HorizontalAlignment="Center">
                     <TextBlock.Effect>
@@ -85,7 +85,7 @@
                     <DropShadowEffect Color="#3b82f6" BlurRadius="20" ShadowDepth="0" Opacity="0.3"/>
                 </Border.Effect>
                 <StackPanel Margin="20">
-                    <TextBlock Text="?? Quizzen" FontSize="18" FontWeight="Bold" 
+                    <TextBlock Text="📚 Quizzen" FontSize="18" FontWeight="Bold" 
                                Foreground="White" Margin="0,0,0,15">
                         <TextBlock.Effect>
                             <DropShadowEffect Color="#3b82f6" BlurRadius="5"/>
@@ -100,12 +100,12 @@
                              SelectionChanged="QuizListBox_SelectionChanged"/>
                     
                     <StackPanel Orientation="Horizontal" Margin="0,15,0,0">
-                        <Button x:Name="NewQuizButton" Content="? Nieuwe Quiz" 
+                        <Button x:Name="NewQuizButton" Content="➕ Nieuwe Quiz" 
                                 Background="#10b981" Foreground="White"
                                 Padding="12,8" Margin="0,0,8,0" FontSize="13"
                                 Style="{StaticResource ModernButton}"
                                 Click="NewQuizButton_Click"/>
-                        <Button x:Name="DeleteQuizButton" Content="??? Verwijder" 
+                        <Button x:Name="DeleteQuizButton" Content="🗑 Verwijder" 
                                 Background="#ef4444" Foreground="White"
                                 Padding="12,8" FontSize="13"
                                 Style="{StaticResource ModernButton}"
@@ -114,28 +114,49 @@
                     
                     <Separator Background="#475569" Margin="0,20,0,15"/>
                     
-                    <TextBlock Text="?? Vragen in Quiz" FontSize="16" FontWeight="Bold" 
+                    <TextBlock Text="❓ Vragen in Quiz" FontSize="16" FontWeight="Bold" 
                                Foreground="White" Margin="0,0,0,15"/>
                     
-                    <ListBox x:Name="QuestionsListBox" Height="220"
-                             Background="#334155" Foreground="White"
-                             BorderBrush="#475569" BorderThickness="1"
-                             Padding="5" FontSize="13"
-                             SelectionChanged="QuestionsListBox_SelectionChanged">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Text}" TextWrapping="Wrap" MaxWidth="270"/>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
+                    <ScrollViewer Height="220" VerticalScrollBarVisibility="Auto" 
+                                  PanningMode="VerticalOnly"
+                                  Background="#334155">
+                        <ItemsControl x:Name="QuestionsListBox"
+                                     Background="Transparent"
+                                     Margin="5">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Background="#475569" CornerRadius="6" Padding="10" Margin="0,0,0,6"
+                                            Cursor="Hand"
+                                            MouseLeftButtonUp="QuestionBorder_Click">
+                                        <StackPanel>
+                                            <TextBlock Foreground="#fbbf24" FontWeight="Bold" FontSize="11" Margin="0,0,0,4">
+                                                <Run Text="❓ VRAAG "/>
+                                                <Run Text="{Binding Id}"/>
+                                            </TextBlock>
+                                            <TextBlock Text="{Binding Text}" 
+                                                       TextWrapping="Wrap" 
+                                                       MaxWidth="250"
+                                                       Foreground="White"
+                                                       FontSize="12"
+                                                       LineHeight="16"/>
+                                            <TextBlock Foreground="#10b981" FontSize="10" FontWeight="SemiBold" Margin="0,6,0,0">
+                                                <Run Text="✓ Antwoord: "/>
+                                                <Run Text="{Binding CorrectAnswer}"/>
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
                     
                     <StackPanel Orientation="Horizontal" Margin="0,15,0,0">
-                        <Button x:Name="NewQuestionButton" Content="? Nieuwe Vraag" 
+                        <Button x:Name="NewQuestionButton" Content="➕ Nieuwe Vraag" 
                                 Background="#3b82f6" Foreground="White"
                                 Padding="12,8" Margin="0,0,8,0" FontSize="13"
                                 Style="{StaticResource ModernButton}"
                                 Click="NewQuestionButton_Click"/>
-                        <Button x:Name="DeleteQuestionButton" Content="??? Verwijder" 
+                        <Button x:Name="DeleteQuestionButton" Content="🗑️ Verwijder" 
                                 Background="#ef4444" Foreground="White"
                                 Padding="12,8" FontSize="13"
                                 Style="{StaticResource ModernButton}"
@@ -150,12 +171,13 @@
                 <Border.Effect>
                     <DropShadowEffect Color="#3b82f6" BlurRadius="20" ShadowDepth="0" Opacity="0.3"/>
                 </Border.Effect>
-                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <ScrollViewer VerticalScrollBarVisibility="Auto"
+                              PanningMode="VerticalOnly">
                     <StackPanel Margin="25" x:Name="QuestionEditorPanel">
                         
                         <!-- Quiz Name Editor -->
                         <StackPanel x:Name="QuizEditorPanel" Visibility="Collapsed">
-                            <TextBlock Text="?? Quiz Instellingen" FontSize="20" FontWeight="Bold" 
+                            <TextBlock Text="⚙️ Quiz Instellingen" FontSize="20" FontWeight="Bold" 
                                        Foreground="White" Margin="0,0,0,25"/>
                             
                             <TextBlock Text="Quiz Naam:" FontWeight="Bold" 
@@ -168,12 +190,12 @@
                                      Style="{StaticResource ModernTextBox}"
                                      TextWrapping="Wrap" AcceptsReturn="True" Height="80"/>
                             
-                            <TextBlock Text="?? Tijd per vraag (seconden):" FontWeight="Bold" 
+                            <TextBlock Text="⏱️ Tijd per vraag (seconden):" FontWeight="Bold" 
                                        Foreground="#e2e8f0" Margin="0,20,0,8" FontSize="14"/>
                             <TextBox x:Name="TimePerQuestionTextBox" 
                                      Style="{StaticResource ModernTextBox}" Text="30"/>
                             
-                            <Button x:Name="SaveQuizButton" Content="?? Quiz Opslaan" 
+                            <Button x:Name="SaveQuizButton" Content="💾 Quiz Opslaan" 
                                     Background="#10b981" Foreground="White"
                                     Padding="20,12" Margin="0,25,0,0" FontSize="16" FontWeight="Bold"
                                     Style="{StaticResource ModernButton}"
@@ -183,17 +205,17 @@
                         <!-- Question Editor -->
                         <StackPanel x:Name="QuestionEditPanel" Visibility="Collapsed">
                             <Grid Margin="0,0,0,25">
-                                <TextBlock Text="? Vraag Bewerken" FontSize="20" FontWeight="Bold" 
+                                <TextBlock Text="❓ Vraag Bewerken" FontSize="20" FontWeight="Bold" 
                                            Foreground="White" HorizontalAlignment="Left"/>
                                 
                                 <!-- Navigation Buttons for Questions -->
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                    <Button x:Name="PreviousQuestionButton" Content="? Vorige" 
+                                    <Button x:Name="PreviousQuestionButton" Content="⬅ Vorige" 
                                             Background="#6b7280" Foreground="White"
                                             Padding="12,6" Margin="0,0,8,0" FontSize="13"
                                             Style="{StaticResource ModernButton}"
                                             Click="PreviousQuestionButton_Click"/>
-                                    <Button x:Name="NextQuestionButton" Content="Volgende ?" 
+                                    <Button x:Name="NextQuestionButton" Content="Volgende ➡" 
                                             Background="#6b7280" Foreground="White"
                                             Padding="12,6" FontSize="13"
                                             Style="{StaticResource ModernButton}"
@@ -207,7 +229,7 @@
                                      Style="{StaticResource ModernTextBox}"
                                      TextWrapping="Wrap" AcceptsReturn="True" Height="100"/>
                             
-                            <TextBlock Text="??? Afbeelding (optioneel):" FontWeight="Bold" 
+                            <TextBlock Text="🖼️ Afbeelding (optioneel):" FontWeight="Bold" 
                                        Foreground="#e2e8f0" Margin="0,20,0,8" FontSize="14"/>
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -216,7 +238,7 @@
                                 </Grid.ColumnDefinitions>
                                 <TextBox x:Name="ImagePathTextBox" Grid.Column="0"
                                          Style="{StaticResource ModernTextBox}"/>
-                                <Button x:Name="BrowseImageButton" Grid.Column="1" Content="?? Bladeren" 
+                                <Button x:Name="BrowseImageButton" Grid.Column="1" Content="📁 Bladeren" 
                                         Background="#8b5cf6" Foreground="White"
                                         Padding="12,8" Margin="10,0,0,0" FontSize="13"
                                         Style="{StaticResource ModernButton}"
@@ -295,7 +317,7 @@
                                 </Border>
                             </Grid>
                             
-                            <Button x:Name="SaveQuestionButton" Content="?? Vraag Opslaan" 
+                            <Button x:Name="SaveQuestionButton" Content="💾 Vraag Opslaan" 
                                     Background="#3b82f6" Foreground="White"
                                     Padding="20,12" Margin="0,30,0,0" FontSize="16" FontWeight="Bold"
                                     Style="{StaticResource ModernButton}"
@@ -304,7 +326,7 @@
                         
                         <!-- Default Message -->
                         <TextBlock x:Name="DefaultMessageText" 
-                                   Text="?? Selecteer een quiz of vraag om te bewerken"
+                                   Text="👈 Selecteer een quiz of vraag om te bewerken"
                                    FontSize="18" Foreground="#64748b" FontWeight="SemiBold"
                                    HorizontalAlignment="Center" VerticalAlignment="Center"
                                    Margin="0,100,0,0"/>

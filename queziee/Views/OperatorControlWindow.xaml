@@ -125,7 +125,7 @@
         <Border Grid.Row="0" Background="{StaticResource HeaderGradient}" Padding="25"
                 Effect="{StaticResource GlowEffect}">
             <StackPanel>
-                <TextBlock Text="?? ROC-Events Quiz - Operator Panel" 
+                <TextBlock Text=" ROC-Events Quiz - Operator Panel" 
                            FontSize="28" FontWeight="Bold" 
                            Foreground="White" HorizontalAlignment="Center" Margin="0,0,0,12">
                     <TextBlock.Effect>
@@ -174,7 +174,6 @@
                                 Padding="15,8" HorizontalAlignment="Right"
                                 BorderBrush="#3b82f6" BorderThickness="2">
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="??" FontSize="24" Foreground="#fbbf24" Margin="0,0,8,0"/>
                                 <TextBlock x:Name="TimerDisplay" 
                                            Text="30s" 
                                            FontSize="24" FontWeight="Bold" 
@@ -361,7 +360,7 @@
                 </Grid.ColumnDefinitions>
                 
                 <StackPanel Grid.Column="0" VerticalAlignment="Center">
-                    <Button x:Name="PreviousButton" Content="? Vorige Vraag" 
+                    <Button x:Name="PreviousButton" Content=" Vorige Vraag" 
                             Background="#6b7280" Foreground="White"
                             Style="{StaticResource OperatorButton}"
                             Click="PreviousButton_Click"/>
@@ -370,12 +369,12 @@
                 <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <!-- Timer Controls -->
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,12">
-                        <Button x:Name="StartTimerButton" Content="?? Start Timer" 
+                        <Button x:Name="StartTimerButton" Content=" Start Timer" 
                                 Background="#8b5cf6" Foreground="White"
                                 Style="{StaticResource OperatorButton}"
                                 Padding="18,10" FontSize="15"
                                 Click="StartTimerButton_Click"/>
-                        <Button x:Name="StopTimerButton" Content="?? Stop Timer" 
+                        <Button x:Name="StopTimerButton" Content=" Stop Timer" 
                                 Background="#dc2626" Foreground="White"
                                 Style="{StaticResource OperatorButton}"
                                 Padding="18,10" FontSize="15"
@@ -383,7 +382,7 @@
                     </StackPanel>
                     
                     <!-- Answer and Next Buttons -->
-                    <Button x:Name="ShowAnswerButton" Content="? Toon Correct Antwoord" 
+                    <Button x:Name="ShowAnswerButton" Content=" Toon Correct Antwoord" 
                             Background="#f59e0b" Foreground="White"
                             Style="{StaticResource OperatorButton}"
                             Width="360" FontSize="18"
@@ -397,7 +396,7 @@
                 </StackPanel>
                 
                 <StackPanel Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center">
-                    <Button x:Name="CloseButton" Content="? Sluiten" 
+                    <Button x:Name="CloseButton" Content=" Sluiten" 
                             Background="#dc2626" Foreground="White"
                             Style="{StaticResource OperatorButton}"
                             Click="CloseButton_Click"/>

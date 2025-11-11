@@ -9,7 +9,7 @@
       {
         "Id": 1,
         "Text": "Wat is de hoofdstad van Nederland?",
-        "ImagePath": null,
+        "ImagePath": "C:\\Users\\meevi\\OneDrive\\Afbeeldingen\\_DSC7277.JPG",
         "AnswerA": "Amsterdam",
         "AnswerB": "Den Haag",
         "AnswerC": "Rotterdam",
@@ -124,39 +124,6 @@
         "AnswerD": "Voetbal",
         "CorrectAnswer": "B",
         "QuizId": 1,
-        "Quiz": null
-      }
-    ]
-  },
-  {
-    "Id": 2,
-    "Name": "test",
-    "Description": "test",
-    "CreatedDate": "2025-11-07T13:32:06.5304819+01:00",
-    "TimePerQuestion": 30,
-    "Questions": [
-      {
-        "Id": 1,
-        "Text": "cianan",
-        "ImagePath": null,
-        "AnswerA": "ja",
-        "AnswerB": "miss",
-        "AnswerC": "nee",
-        "AnswerD": "hankie tonkie",
-        "CorrectAnswer": "A",
-        "QuizId": 2,
-        "Quiz": null
-      },
-      {
-        "Id": 2,
-        "Text": "nee",
-        "ImagePath": null,
-        "AnswerA": "nee",
-        "AnswerB": "njet",
-        "AnswerC": "nein",
-        "AnswerD": "no",
-        "CorrectAnswer": "A",
-        "QuizId": 2,
         "Quiz": null
       }
     ]
